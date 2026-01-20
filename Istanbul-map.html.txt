@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕌 Стамбул 3 дня - Мобильный маршрут</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333; min-height: 100vh;
+            padding: 15px;
+        }
+        h1 { 
+            text-align: center; color: white; 
+            font-size: 24px; margin: 20px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .day { 
+            background: rgba(255,255,255,0.95); 
+            margin: 15px 0; border-radius: 20px;
+            padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .day h2 { 
+            color: #667eea; font-size: 20px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .stop { 
+            display: flex; align-items: center; 
+            margin: 12px 0; padding: 12px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px; color: white;
+            transition: transform 0.2s;
+        }
+        .stop:hover { transform: scale(1.02); }
+        .stop.metro { background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%); }
+        .stop.tram { background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%); }
+        .stop-icon { font-size: 20px; margin-right: 12px; }
+        .stop-time { font-weight: bold; margin-right: 10px; }
+        .stop-info { opacity: 0.9; font-size: 14px; }
+        #map { 
+            height: 300px; border-radius: 20px; 
+            margin: 20px 0; background: #e0e0e0;
+            display: flex; align-items: center; justify-content: center;
+            color: #666; font-size: 16px;
+        }
+        .transport { 
+            text-align: center; padding: 15px; 
+            background: rgba(255,255,255,0.9); border-radius: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🕌 Стамбул 3 дня</h1>
+    
+    <div class="transport">
+        <strong>🚌 Istanbulkart: 150 TL (трамвай + паром)</strong><br>
+        <small>T1 трамвай — основной транспорт по маршруту</small>
+    </div>
+
+    <div id="map">📍 Откройте Google Maps для навигации по остановкам</div>
+
+    <!-- День 1 -->
+    <div class="day">
+        <h2>🌅 День 1: Султанахмет</h2>
+        <div class="stop tram">
+            <span class="stop-icon">🚋</span>
+            <span class="stop-time">9:00</span>
+            <span class="stop-info">T1 Sultanahmet → Айя-София 🕌</span>
+        </div>
+        <div class="stop">
+            <span class="stop-icon">🕌</span>
+            <span class="stop-time">10:30</span>
+            <span class="stop-info">Голубая мечеть (пешком 5 мин)</span>
+        </div>
+        <div class="stop">
+            <span class="stop-icon">💧</span>
+            <span class="stop-time">14:00</span>
+            <span class="stop-info">Цистерна Базилика (пешком 7 мин)</span>
+        </div>
+    </div>
+
+    <!-- День 2 -->
+    <div class="day">
+        <h2>🌊 День 2: Базары + Галата</h2>
+        <div class="stop tram">
+            <span class="stop-icon">🚋</span>
+            <span class="stop-time">10:00</span>
+            <span class="stop-info">T1 Beyazıt → Гранд-базар 🛍️</span>
+        </div>
+        <div class="stop tram">
+            <span class="stop-icon">🚋</span>
+            <span class="stop-time">13:00</span>
+            <span class="stop-info">T1 Eminönü → Сулеймание (фуникулёр)</span>
+        </div>
+        <div class="stop metro">
+            <span class="stop-icon">🚇</span>
+            <span class="stop-time">18:00</span>
+            <span class="stop-info">M2 Karaköy → Галатская башня 🗼</span>
+        </div>
+    </div>
+
+    <!-- День 3 -->
+    <div class="day">
+        <h2>🎡 День 3: Босфор + Долмабахче</h2>
+        <div class="stop tram">
+            <span class="stop-icon">⛴️</span>
+            <span class="stop-time">10:00</span>
+            <span class="stop-info">Eminönü причал → Круиз Босфор (1.5ч)</span>
+        </div>
+        <div class="stop tram">
+            <span class="stop-icon">🚋</span>
+            <span class="stop-time">12:00</span>
+            <span class="stop-info">T1 Kabataş → Долмабахче сарай 🏛️</span>
+        </div>
+        <div class="stop metro">
+            <span class="stop-icon">🚇</span>
+            <span class="stop-time">15:00</span>
+            <span class="stop-info">M2 Taksim → Балат (пешком)</span>
+        </div>
+    </div>
+
+    <div class="transport">
+        <strong>📱 Google Maps ссылки:</strong><br>
+        • T1 Sultanahmet: <a href="https://maps.app.goo.gl/xyz123" style="color:#667eea">Открыть</a><br>
+        • M2 Karaköy: <a href="https://maps.app.goo.gl/abc456" style="color:#667eea">Открыть</a>
+    </div>
+
+    <script>
+        // Автообновление времени
+        function updateTime() {
+            const now = new Date();
+            document.querySelectorAll('.day h2').forEach((h2, i) => {
+                const dayNum = i + 1;
+                h2.innerHTML += ` (${now.toLocaleDateString('ru-RU', {weekday: 'short'})} +${dayNum} дней)`;
+            });
+        }
+        updateTime();
+    </script>
+</body>
+</html>
